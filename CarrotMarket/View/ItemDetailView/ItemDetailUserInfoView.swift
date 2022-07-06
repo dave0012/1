@@ -43,10 +43,13 @@ class ItemDetailUserInfoView: UIView {
         super.init(frame: frame)
         
         addSubview(userInfoImageView)
-        userInfoImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 10, paddingBottom: 20, paddingRight: 300)
+        userInfoImageView.anchor(top: topAnchor, left: leftAnchor, paddingTop: 20, paddingLeft: 20)
+        userInfoImageView.setDimension(width: 50, height: 50)
+        userInfoImageView.layer.cornerRadius = 50 / 2
+        userInfoImageView.layer.masksToBounds = true
         
         addSubview(nameLabel)
-        nameLabel.anchor(top: topAnchor, left: userInfoImageView.rightAnchor, paddingTop: 20)
+        nameLabel.anchor(top: topAnchor, left: userInfoImageView.rightAnchor, paddingTop: 20, paddingLeft: 15)
         
         addSubview(seperateLine)
         seperateLine.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 20, paddingRight: 20, height: 1)

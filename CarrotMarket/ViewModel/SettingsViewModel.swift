@@ -26,13 +26,3 @@ enum SettingsSections: Int, CaseIterable {
 // myActivity 부터 원시값을 0~4까지 매칭되어있음 
 
 
-struct SettingsViewModel {
-    
-
-
-    
-    
-}
-
-
-

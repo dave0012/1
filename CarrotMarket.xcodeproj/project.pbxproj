@@ -15,15 +15,18 @@
 		5A2735712855B6AF001E9624 /* NeighborhoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2735702855B6AF001E9624 /* NeighborhoodViewController.swift */; };
 		5A2735732855B6C4001E9624 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2735722855B6C4001E9624 /* ChatViewController.swift */; };
 		5A2735752855B6DC001E9624 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2735742855B6DC001E9624 /* InfoViewController.swift */; };
+		5A6F8CF228742AF800170E83 /* TextViewField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F8CF128742AF800170E83 /* TextViewField.swift */; };
+		5A6F8CF42875348000170E83 /* ModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F8CF32875348000170E83 /* ModifyViewController.swift */; };
+		5A6F8CF62875456C00170E83 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F8CF52875456C00170E83 /* User.swift */; };
+		5A6F8CF8287546FA00170E83 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F8CF7287546FA00170E83 /* UserService.swift */; };
+		5A6F8CFA28759C6500170E83 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F8CF928759C6500170E83 /* PostService.swift */; };
+		5A6F8CFC2875A18C00170E83 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F8CFB2875A18C00170E83 /* Post.swift */; };
 		5A9D6AD3285EE1CC00D642A0 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9D6AD2285EE1CC00D642A0 /* AddButton.swift */; };
 		5A9D6AD5285EECBC00D642A0 /* ItemAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9D6AD4285EECBC00D642A0 /* ItemAddController.swift */; };
-		5A9D6AD8285EEEDF00D642A0 /* AddItemHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9D6AD7285EEEDF00D642A0 /* AddItemHeaderView.swift */; };
-		5A9D6ADA285EEEEF00D642A0 /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9D6AD9285EEEEF00D642A0 /* AddItemCell.swift */; };
 		5A9D6ADE285EFCC000D642A0 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9D6ADD285EFCC000D642A0 /* TitleView.swift */; };
 		5A9D6AE0285F205800D642A0 /* NeighborhoodWritingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9D6ADF285F205800D642A0 /* NeighborhoodWritingController.swift */; };
 		5AA05BE4286046210018D2AA /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA05BE3286046210018D2AA /* Constant.swift */; };
-		5AA05BE6286046720018D2AA /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA05BE5286046720018D2AA /* Service.swift */; };
-		5AA05BEA286209530018D2AA /* AddItemFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA05BE9286209530018D2AA /* AddItemFooterView.swift */; };
+		5AA05BE6286046720018D2AA /* ItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA05BE5286046720018D2AA /* ItemService.swift */; };
 		5AA3915B285622E4003FFBB0 /* ItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3915A285622E4003FFBB0 /* ItemViewCell.swift */; };
 		5AA3915D2856FC83003FFBB0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3915C2856FC83003FFBB0 /* Item.swift */; };
 		5AA3916128574263003FFBB0 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3916028574263003FFBB0 /* ItemDetailViewController.swift */; };
@@ -64,15 +67,18 @@
 		5A2735702855B6AF001E9624 /* NeighborhoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodViewController.swift; sourceTree = "<group>"; };
 		5A2735722855B6C4001E9624 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		5A2735742855B6DC001E9624 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		5A6F8CF128742AF800170E83 /* TextViewField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewField.swift; sourceTree = "<group>"; };
+		5A6F8CF32875348000170E83 /* ModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyViewController.swift; sourceTree = "<group>"; };
+		5A6F8CF52875456C00170E83 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5A6F8CF7287546FA00170E83 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5A6F8CF928759C6500170E83 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		5A6F8CFB2875A18C00170E83 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5A9D6AD2285EE1CC00D642A0 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		5A9D6AD4285EECBC00D642A0 /* ItemAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAddController.swift; sourceTree = "<group>"; };
-		5A9D6AD7285EEEDF00D642A0 /* AddItemHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemHeaderView.swift; sourceTree = "<group>"; };
-		5A9D6AD9285EEEEF00D642A0 /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
 		5A9D6ADD285EFCC000D642A0 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		5A9D6ADF285F205800D642A0 /* NeighborhoodWritingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborhoodWritingController.swift; sourceTree = "<group>"; };
 		5AA05BE3286046210018D2AA /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		5AA05BE5286046720018D2AA /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		5AA05BE9286209530018D2AA /* AddItemFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemFooterView.swift; sourceTree = "<group>"; };
+		5AA05BE5286046720018D2AA /* ItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
 		5AA3915A285622E4003FFBB0 /* ItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewCell.swift; sourceTree = "<group>"; };
 		5AA3915C2856FC83003FFBB0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5AA3916028574263003FFBB0 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				5A27356428544A47001E9624 /* AuthManager.swift */,
-				5AA05BE5286046720018D2AA /* Service.swift */,
+				5AA05BE5286046720018D2AA /* ItemService.swift */,
+				5A6F8CF7287546FA00170E83 /* UserService.swift */,
+				5A6F8CF928759C6500170E83 /* PostService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -148,16 +156,6 @@
 				5A2735742855B6DC001E9624 /* InfoViewController.swift */,
 			);
 			path = General;
-			sourceTree = "<group>";
-		};
-		5A9D6AD6285EEEAA00D642A0 /* AddItemView */ = {
-			isa = PBXGroup;
-			children = (
-				5A9D6AD7285EEEDF00D642A0 /* AddItemHeaderView.swift */,
-				5A9D6AD9285EEEEF00D642A0 /* AddItemCell.swift */,
-				5AA05BE9286209530018D2AA /* AddItemFooterView.swift */,
-			);
-			path = AddItemView;
 			sourceTree = "<group>";
 		};
 		5AAD23F6285B38B60021B814 /* NeighborhoodDetailView */ = {
@@ -236,6 +234,7 @@
 				5A9D6ADF285F205800D642A0 /* NeighborhoodWritingController.swift */,
 				5AAD23F4285B33DC0021B814 /* NeighborhoodDetailController.swift */,
 				5AAD23FF285C97BD0021B814 /* ChatViewDetailController.swift */,
+				5A6F8CF32875348000170E83 /* ModifyViewController.swift */,
 				5A273566285451F5001E9624 /* AuthController */,
 				5A27356D2855B4A2001E9624 /* General */,
 			);
@@ -253,7 +252,9 @@
 		5AEF5A202851A4910061C04A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5A6F8CF52875456C00170E83 /* User.swift */,
 				5AA3915C2856FC83003FFBB0 /* Item.swift */,
+				5A6F8CFB2875A18C00170E83 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,7 +262,6 @@
 		5AEF5A212851A49B0061C04A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5A9D6AD6285EEEAA00D642A0 /* AddItemView */,
 				5AAD2401285D9CA10021B814 /* Settings */,
 				5AD8B6A3285873CE0033187F /* ItemDetailView */,
 				5AAD23F6285B38B60021B814 /* NeighborhoodDetailView */,
@@ -271,6 +271,7 @@
 				5AAD23FD285C81AA0021B814 /* ChattingCell.swift */,
 				5A9D6AD2285EE1CC00D642A0 /* AddButton.swift */,
 				5A9D6ADD285EFCC000D642A0 /* TitleView.swift */,
+				5A6F8CF128742AF800170E83 /* TextViewField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,11 +419,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A27356B2854553C001E9624 /* SMSCodeView.swift in Sources */,
+				5A6F8CF42875348000170E83 /* ModifyViewController.swift in Sources */,
 				5AEF5A232851A4C00061C04A /* LoginController.swift in Sources */,
 				5AA3916128574263003FFBB0 /* ItemDetailViewController.swift in Sources */,
 				5A27356528544A47001E9624 /* AuthManager.swift in Sources */,
-				5AA05BEA286209530018D2AA /* AddItemFooterView.swift in Sources */,
 				5AD8B6A028585D160033187F /* ItemDetailBottomView.swift in Sources */,
+				5A6F8CFC2875A18C00170E83 /* Post.swift in Sources */,
 				5ABB2021285DC5DF00AF5183 /* SettingsFooter.swift in Sources */,
 				5AAD2400285C97BD0021B814 /* ChatViewDetailController.swift in Sources */,
 				5A2735712855B6AF001E9624 /* NeighborhoodViewController.swift in Sources */,
@@ -432,7 +434,7 @@
 				5A27356F2855B4E7001E9624 /* MainTapBarController.swift in Sources */,
 				5AAD23FA285B39090021B814 /* NeighborhoodDetailMiddleView.swift in Sources */,
 				5AAD23FE285C81AA0021B814 /* ChattingCell.swift in Sources */,
-				5AA05BE6286046720018D2AA /* Service.swift in Sources */,
+				5AA05BE6286046720018D2AA /* ItemService.swift in Sources */,
 				5AEF5A0A2851A45F0061C04A /* AppDelegate.swift in Sources */,
 				5A9D6AD3285EE1CC00D642A0 /* AddButton.swift in Sources */,
 				5A9D6AD5285EECBC00D642A0 /* ItemAddController.swift in Sources */,
@@ -441,21 +443,23 @@
 				5AA3915D2856FC83003FFBB0 /* Item.swift in Sources */,
 				5ABB201F285DA83500AF5183 /* SettingsViewModel.swift in Sources */,
 				5AAD2405285D9CE90021B814 /* SettingsCell.swift in Sources */,
-				5A9D6AD8285EEEDF00D642A0 /* AddItemHeaderView.swift in Sources */,
 				5A2735752855B6DC001E9624 /* InfoViewController.swift in Sources */,
 				5A9D6AE0285F205800D642A0 /* NeighborhoodWritingController.swift in Sources */,
 				5AEF5A252851A5330061C04A /* MainController.swift in Sources */,
 				5AAD23F8285B38FB0021B814 /* NeighborhoodDetailTopView.swift in Sources */,
+				5A6F8CF62875456C00170E83 /* User.swift in Sources */,
 				5AA05BE4286046210018D2AA /* Constant.swift in Sources */,
 				5A2735732855B6C4001E9624 /* ChatViewController.swift in Sources */,
 				5AD8B6A728587CAC0033187F /* ItemImageCell.swift in Sources */,
+				5A6F8CF228742AF800170E83 /* TextViewField.swift in Sources */,
 				5AD8B6A5285874060033187F /* ItemDetailDescriptionView.swift in Sources */,
 				5AD8B6A9285AF21F0033187F /* NeighborhoodViewCell.swift in Sources */,
 				5A9D6ADE285EFCC000D642A0 /* TitleView.swift in Sources */,
 				5A27356928545248001E9624 /* HomeViewController.swift in Sources */,
-				5A9D6ADA285EEEEF00D642A0 /* AddItemCell.swift in Sources */,
+				5A6F8CFA28759C6500170E83 /* PostService.swift in Sources */,
 				5AAD2403285D9CBA0021B814 /* SettingsHeader.swift in Sources */,
 				5AAD23FC285B39130021B814 /* NeighborhoodDetailBottomView.swift in Sources */,
+				5A6F8CF8287546FA00170E83 /* UserService.swift in Sources */,
 				5AD8B6A2285871A90033187F /* ItemDetailUserInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,6 +615,7 @@
 				INFOPLIST_FILE = CarrotMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -640,6 +645,7 @@
 				INFOPLIST_FILE = CarrotMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

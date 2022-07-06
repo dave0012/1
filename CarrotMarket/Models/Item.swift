@@ -8,21 +8,36 @@
 import UIKit
 
 struct Item {
-    //let uid: String
-    var itemImage: UIImage
-    var itemTitle: String
-    var itemPrice: String
-    var itemDescirption: String
-    var location: String
-    var time: String
     
-//    init(dictionary: [String: Any]) {
-//        self.uid = dictionary["uid"] as? String ?? ""
-//        self.itemImage = dictionary["itemImage"] as? UIImage ?? #imageLiteral(resourceName: "logo")
-//        self.itemTitle = dictionary["itemTitle"] as? String ?? ""
-//        self.itemPrice = dictionary["itemPrice"] as? Int ?? 0
-//        self.itemDescirption = dictionary["itemDescription"] as? String ?? ""
-//        self.location = dictionary["location"] as? String ?? "서초동"
-//        self.time = dictionary["time"] as? String ?? "1분전"
-//    }
+    var itemImageUrl: URL?
+    let itemID: String
+    let itemTitle: String
+    let itemPrice: String
+    let caption: String
+    let uid: String
+    let likes: Int
+    var timestamp: Date!
+    let commentCount: Int
+    
+    init(itemID: String, dictionary: [String: Any]) {
+        self.itemID = itemID
+        
+        self.itemTitle = dictionary["itemTitle"] as? String ?? ""
+        self.itemPrice = dictionary["itemPrice"] as? String ?? ""
+
+        self.caption = dictionary["caption"] as? String ?? ""
+        self.uid = dictionary["uid"] as? String ?? ""
+        self.likes = dictionary["likes"] as? Int ?? 0
+        self.commentCount = dictionary["retweetCount"] as? Int ?? 0
+        
+        if let itemImageUrl = dictionary["itemImageUrl"] as? String {
+            guard let url = URL(string: itemImageUrl) else { return }
+            self.itemImageUrl = url
+        }
+        
+        if let timestamp = dictionary["timestamp"] as? Double {
+            self.timestamp = Date(timeIntervalSince1970: timestamp)
+            
+        }
+    }
 }

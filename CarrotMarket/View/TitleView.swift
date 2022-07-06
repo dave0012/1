@@ -17,7 +17,6 @@ protocol TitleViewDelegate: AnyObject {
 class TitleView: UIView {
     
 
-    
     // MARK: - Properties
     
     weak var delegate: TitleViewDelegate?

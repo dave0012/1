@@ -7,9 +7,14 @@
 
 import UIKit
 
-class NeighborhoodViewCell: UITableViewCell {
+class NeighborhoodViewCell: UICollectionViewCell {
     
     // MARK: - Properties
+    
+    var post: Post? {
+        didSet { configure() }
+    }
+    
     
     let questionType: UILabel = {
         let label = UILabel()
@@ -27,17 +32,19 @@ class NeighborhoodViewCell: UITableViewCell {
     let questionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.numberOfLines = 3
         
-        let attributedText = NSMutableAttributedString(string: "Q.", attributes: [.foregroundColor: UIColor(hex: "DD7C45"),
-                                                                                  .font: UIFont.systemFont(ofSize: 16)])
         
-        attributedText.append(NSAttributedString(string: " 세종으로 이사를 왔는데 남자 포마드 머리 잘하는 곳 없나요... 바버샵은 너무 비싸서 엄두가 안나네요 ㅠ 15000이하면 좋겠어요 ㅠ 나성 새롬 주변 희망합니당", attributes: [.font: UIFont.systemFont(ofSize: 16)]))
+//        label.numberOfLines = 3
+//
+//        let attributedText = NSMutableAttributedString(string: "Q.", attributes: [.foregroundColor: UIColor(hex: "DD7C45"),
+//                                                                                  .font: UIFont.systemFont(ofSize: 16)])
+//
+//        attributedText.append(NSAttributedString(string: " 세종으로 이사를 왔는데 남자 포마드 머리 잘하는 곳 없나요... 바버샵은 너무 비싸서 엄두가 안나네요 ㅠ 15000이하면 좋겠어요 ㅠ 나성 새롬 주변 희망합니당", attributes: [.font: UIFont.systemFont(ofSize: 16)]))
         
 //        attributedText.append(NSAttributedString(string: "더보기", attributes: [.foregroundColor: UIColor(hex: "878B94"),
 //                                                                              .font: UIFont.systemFont(ofSize: 13, weight: .bold)]))
         
-        label.attributedText = attributedText
+//        label.attributedText = attributedText
         
         
         return label
@@ -129,16 +136,17 @@ class NeighborhoodViewCell: UITableViewCell {
     
     // MARK: - Lifecycle
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         configureUI()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
     
     
     // MARK: - Helpers
@@ -177,12 +185,13 @@ class NeighborhoodViewCell: UITableViewCell {
         contentView.addSubview(mainSeperateLine)
         mainSeperateLine.anchor(left: contentView.leftAnchor, bottom: contentView.bottomAnchor,right: contentView.rightAnchor, height: 8)
         
-        
-
-        
     }
     
-    
-    
-    
+    func configure() {
+        
+        guard let post = post else { return }
+        questionLabel.text = post.caption
+    }
 }
+
+

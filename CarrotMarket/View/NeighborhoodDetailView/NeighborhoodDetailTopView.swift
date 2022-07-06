@@ -64,7 +64,9 @@ class NeighborhoodDetailTopView: UIView {
         addSubview(userInfoImageView)
         userInfoImageView.anchor(top: questionType.bottomAnchor, left: leftAnchor,
                             paddingTop: 10, paddingLeft: 15)
-        userInfoImageView.setDimension(width: 30, height: 50)
+        userInfoImageView.setDimension(width: 50, height: 50)
+        userInfoImageView.layer.cornerRadius = 50 / 2
+        userInfoImageView.layer.masksToBounds = true
         
 
         let stack = UIStackView(arrangedSubviews: [nameLabel, locationLabel])

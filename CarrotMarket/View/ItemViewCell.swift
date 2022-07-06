@@ -7,13 +7,16 @@
 
 
 import UIKit
+import SDWebImage
 
 
-class ItemViewCell: UITableViewCell {
+class ItemViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    let largeConfiguration = UIImage.SymbolConfiguration(pointSize: 18, weight: .light)
+    var item: Item? {
+        didSet { configure() }
+    }
 
     
     let itemImageView: UIImageView = {
@@ -35,6 +38,7 @@ class ItemViewCell: UITableViewCell {
     
     let locationLabel: UILabel = {
         let label = UILabel()
+        label.text = "서초동"
         label.textColor = UIColor(hex: "878B94")
         label.font = UIFont.systemFont(ofSize: 11)
         return label
@@ -42,6 +46,7 @@ class ItemViewCell: UITableViewCell {
     
     let timeLabel: UILabel = {
         let label = UILabel()
+        label.text = "1분전"
         label.textColor = UIColor(hex: "878B94")
         label.font = UIFont.systemFont(ofSize: 11)
         return label
@@ -81,19 +86,28 @@ class ItemViewCell: UITableViewCell {
         return view
     }()
     
-  
+    let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        return view
+    }()
+        
+    let largeConfiguration = UIImage.SymbolConfiguration(pointSize: 18, weight: .light)
     
  
     
     // MARK: - Lifecycle
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        backgroundColor = UIColor(hex: "212123")
-
+        backgroundColor = baseColor
         setConstraints()
+    
     }
+  
+        
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -101,31 +115,43 @@ class ItemViewCell: UITableViewCell {
     
     
     private func setConstraints() {
-        contentView.addSubview(itemImageView)
-        itemImageView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor,  paddingTop: 20, paddingLeft: 18, paddingBottom: 20, width: 100)
+        addSubview(itemImageView)
+        itemImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor,  paddingTop: 20, paddingLeft: 18, paddingBottom: 20, width: 100)
        
-        contentView.addSubview(itemTitleLabel)
-        itemTitleLabel.anchor(top: contentView.topAnchor, left: itemImageView.rightAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 18, paddingRight: 20, width: 200, height: 20)
+        addSubview(itemTitleLabel)
+        itemTitleLabel.anchor(top: topAnchor, left: itemImageView.rightAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 18, paddingRight: 20, width: 200, height: 20)
         
         let stack = UIStackView(arrangedSubviews: [locationLabel, timeLabel])
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         
     
-        contentView.addSubview(stack)
-        stack.anchor(top: itemTitleLabel.bottomAnchor, left: itemImageView.rightAnchor, right: contentView.rightAnchor, paddingLeft: 18, paddingRight: 150, height: 20)
+        addSubview(stack)
+        stack.anchor(top: itemTitleLabel.bottomAnchor, left: itemImageView.rightAnchor, right: rightAnchor, paddingLeft: 18, paddingRight: 150, height: 20)
         
-        contentView.addSubview(itemPriceLabel)
-        itemPriceLabel.anchor(top: locationLabel.bottomAnchor, left: itemImageView.rightAnchor, right: contentView.rightAnchor, paddingTop: 5, paddingLeft: 18, paddingRight: 20, width: 200, height: 20)
+        addSubview(itemPriceLabel)
+        itemPriceLabel.anchor(top: locationLabel.bottomAnchor, left: itemImageView.rightAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 18, paddingRight: 20, width: 200, height: 20)
         
-        contentView.addSubview(commentContainer)
-        commentContainer.anchor(left: itemImageView.rightAnchor ,bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 200, paddingBottom: 8, paddingRight: 15)
+        addSubview(commentContainer)
+        commentContainer.anchor(left: itemImageView.rightAnchor ,bottom: bottomAnchor, right: rightAnchor, paddingLeft: 200, paddingBottom: 8, paddingRight: 15)
         commentContainer.setDimension(width: 32, height: 32)
         
-   
-        
+        addSubview(divider)
+        divider.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 20, paddingRight: 20, height: 0.5)
         
     }
+    
+    
+    // MARK: - Helpers
+    
+    func configure() {
+        guard let item = item else { return }
+        itemTitleLabel.text = item.itemTitle
+        itemPriceLabel.text = item.itemPrice
+        itemImageView.sd_setImage(with: item.itemImageUrl)
+        
+    }
+
 }
     
 

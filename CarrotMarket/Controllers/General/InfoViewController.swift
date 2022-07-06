@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SDWebImage
 
 class InfoViewController: UIViewController {
     
@@ -20,36 +21,49 @@ class InfoViewController: UIViewController {
                 ["친구초대", "공지사항", "자주 묻는 질문", "앱 설정"]
                 ]
     
+    
+    
+    
     //MARK: - Properties
 
     
+    var user: User?
+//    {
+//        didSet { configureUser() }
+//    }
+//
+    
     let tableView = UITableView()
+    let settingHeader = settingsHeader()
     
     
     //MARK: - Lifecycle
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchUserInfo()
         configureUI()
-        configureTableView()
         setupNaviBar()
-   
-        
+    }
+    
+    
+    // MARK: - API
+    
+    func fetchUserInfo() {
+        UserService.shared.fetchUserInfo { user in
+            self.user = user
+            print("DEBUG: \(self.user)")
+            self.configureTableView()
+        }
     }
     
 
     //MARK: - Helpers
     
     func configureUI() {
-        
         view.backgroundColor = baseColor
-        
-//        view.addSubview(button)
-//        button.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-//                      paddingTop: 20, paddingLeft: 20)
-        
     }
     
     
@@ -58,28 +72,26 @@ class InfoViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
     
         tableView.register(SettingsCell.self, forCellReuseIdentifier: reuseIdentifier)
 
-
-
-        
         tableView.rowHeight = 50
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor(hex: "17161B")
         
-        let header = settingsHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 130))
+        let header = settingsHeader(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 170))
         let footer = SettingsFooter(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         tableView.tableHeaderView = header
         tableView.tableFooterView = footer
         
+        header.delegate = self
         footer.delegate = self
         
-        
+        header.myImage.sd_setImage(with: user?.profileImageUrl)
+        header.myName.text = user?.profileName
+                
         view.addSubview(tableView)
         tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
-        
         
     }
 
@@ -103,35 +115,19 @@ class InfoViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    
-    //MARK: - Actions
-
+//    func configureUser() {
 //
-//
-//    @objc func handleSignOut() {
-//        do {
-//            try Auth.auth().signOut()
-//            DispatchQueue.main.async {
-//                let nav = UINavigationController(rootViewController: MainController())
-//                nav.modalPresentationStyle = .fullScreen
-//                self.present(nav, animated: true, completion: nil)
-//            }
-//            } catch {
-//                print("DEBUG: Error signing out")
-//            }
+//        guard let user = user else { return }
+//        settingHeader.myName.text = user.profileName
+//        settingHeader.myImage.sd_setImage(with: user.profileImageUrl)
 //    }
+
 }
 
 //MARK: - UITableViewDataSource
 
 extension InfoViewController: UITableViewDataSource {
     
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "this is header"
-//    }
-//
- 
     func numberOfSections(in tableView: UITableView) -> Int {
         return data.count
     }
@@ -169,6 +165,20 @@ extension InfoViewController: UITableViewDelegate {
 //     description은 각자 매칭되어있는 값을 리턴한다.
 }
 
+
+
+//MARK: - settingsHeaderDelegate
+
+
+extension InfoViewController: settingsHeaderDelegate {
+    func modifyInfo() {
+        
+        let controller = ModifyViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+    }
+}
+
 //MARK: - SettingsFooterDelegate
 
 extension InfoViewController: SettingsFooterDelegate {
@@ -185,6 +195,7 @@ extension InfoViewController: SettingsFooterDelegate {
             }
     }
 }
+
     
 
 

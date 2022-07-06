@@ -10,6 +10,9 @@ import UIKit
 class NeighborhoodDetailViewController: UIViewController {
     
     
+    var user: User?
+    var post: Post
+    
     
     // MARK: - ForScrollView
     
@@ -36,25 +39,38 @@ class NeighborhoodDetailViewController: UIViewController {
   
     // MARK: - Lifecycle
     
+    init(post: Post){
+        self.post = post
+        super.init(nibName: nil, bundle: nil)
+    }
+    
  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
+        fetchUserInfo()
        
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        hidesBottomBarWhenPushed = true
-        //네비게이션 이동시 탭바 없애주는 기능
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - API
+
     
+    func fetchUserInfo() {
+        UserService.shared.fetchUserInfo { user in
+            self.user = user
+            print("DEBUG: \(self.user)")
+            
+            self.neighborhoodDetailTopView.userInfoImageView.sd_setImage(with: user.profileImageUrl)
+            self.neighborhoodDetailTopView.nameLabel.text = user.profileName
+            
+   
+        }
+    }
         
     // MARK: - Helpers
     func configureUI() {
@@ -72,9 +88,11 @@ class NeighborhoodDetailViewController: UIViewController {
         neighborhoodDetailTopView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 0.001, paddingLeft: 0.001, paddingRight: 0.001)
         neighborhoodDetailTopView.setDimension(width: view.frame.width, height: 100)
         
+        
         contentView.addSubview(neighborhoodDetailMiddleView)
-        neighborhoodDetailMiddleView.anchor(top: neighborhoodDetailTopView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,paddingTop: 0.001, paddingLeft: 0.001, paddingRight: 0.001)
+        neighborhoodDetailMiddleView.anchor(top: neighborhoodDetailTopView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,paddingTop: 10, paddingLeft: 0.001, paddingRight: 0.001)
         neighborhoodDetailMiddleView.setDimension(width: view.frame.width, height: 170)
+        neighborhoodDetailMiddleView.contentsLabel.text = post.caption
         
         
 

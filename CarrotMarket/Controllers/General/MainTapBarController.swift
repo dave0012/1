@@ -6,12 +6,10 @@
 //
 
 import UIKit
-
+import Firebase
 
 class MainTabBarController: UITabBarController {
     
-    
-
     
     // 탭바 이미지 크기 바꾸기
 
@@ -29,13 +27,11 @@ class MainTabBarController: UITabBarController {
         
         // tabBar에 윗줄만 만들기 -> borderwidth 안써도됌
         
-    
-        
         
         viewControllers = [
             
             createNavigationController(
-                rootVC: HomeViewController(),
+                rootVC: HomeViewController(collectionViewLayout: UICollectionViewFlowLayout()),
                 tabBarTitle: "홈",
                 tabBarImage: UIImage(systemName: "house", withConfiguration: regularConfiguration)?
                                     .withRenderingMode(.alwaysOriginal)
@@ -45,7 +41,7 @@ class MainTabBarController: UITabBarController {
                                             .withTintColor(.white)),
             
                 createNavigationController(
-                    rootVC: NeighborhoodViewController(),
+                    rootVC: NeighborhoodViewController(collectionViewLayout: UICollectionViewFlowLayout()),
                     tabBarTitle: "동네생활",
                     tabBarImage: UIImage(systemName: "newspaper", withConfiguration: regularConfiguration)?
                                         .withRenderingMode(.alwaysOriginal)

@@ -6,19 +6,20 @@
 //
 
 import UIKit
+import Firebase
 
-class NeighborhoodViewController: UIViewController {
+let reuseIdentifier = "NeighborhoodViewCell"
+
+class NeighborhoodViewController: UICollectionViewController {
  
-    
-    
-    let reuseIdentifier = "NeighborhoodViewCell"
-    
     
     //MARK: - Properties
     
-    var tableView = UITableView()
-    
     private let addButton = AddButton()
+    
+    private var post = [Post]() {
+        didSet { collectionView.reloadData() }
+    }
     
     
     //MARK: - Lifecycle
@@ -28,10 +29,18 @@ class NeighborhoodViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        configureTabelView()
         setupNaviBar()
         configureButton()
+        fetchPost()
         
+    }
+    
+    //MARK: - Helpers
+    func fetchPost() {
+        PostService.shared.fetchPosts { posts in
+            self.post = posts
+            print("DEBUG: \(self.post)")
+        }
     }
     
     
@@ -44,27 +53,10 @@ class NeighborhoodViewController: UIViewController {
     //MARK: - Helpers
     
     func configureUI() {
-        view.backgroundColor = baseColor
+        collectionView.backgroundColor = UIColor(hex: "17161B")
+        collectionView.register(NeighborhoodViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
     }
-    
-    func configureTabelView() {
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 210
-        tableView.register(NeighborhoodViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.backgroundColor = UIColor(hex: "17161B")
-        
-        tableView.separatorStyle = .none
-        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-        // top, bottom 값은 적용되지않는다.
-        
-        view.addSubview(tableView)
-        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
-    }
-    
-    
     
     
     func setupNaviBar() {
@@ -104,39 +96,43 @@ class NeighborhoodViewController: UIViewController {
     }
 }
     
-
-
-
-
-//MARK: - UITableViewDataSource
-
-extension NeighborhoodViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+extension NeighborhoodViewController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return post.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! NeighborhoodViewCell
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! NeighborhoodViewCell
-        cell.selectionStyle = .none
+        cell.post = post[indexPath.row]
         
         return cell
-        
     }
-}
+ 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let controller = NeighborhoodDetailViewController(post: post[indexPath.row])
+            navigationController?.pushViewController(controller, animated: true)
+        }
+      
+    }
 
-//MARK: - UITableViewDelegate
-
-
-extension NeighborhoodViewController: UITableViewDelegate {
+extension NeighborhoodViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 200)
+    }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 다음화면으로 이동
-        let detailVC = NeighborhoodDetailViewController()
-        navigationController?.pushViewController(detailVC, animated: true)
-        
-    }
+    
+    
 }
+
+
+
+
+
+
+
+
+
 
 extension NeighborhoodViewController: AddButtonDelegate {
     func goToNext() {

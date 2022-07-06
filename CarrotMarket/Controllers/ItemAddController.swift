@@ -5,240 +5,195 @@
 //  Created by 민호 on 2022/06/19.
 //
 
-import Foundation
 import UIKit
-
-
 
 class ItemAddController: UIViewController {
     
-    let reuseIdentifier = "AddItemCell"
-    
-    let data = ["글 제목", "카테고리 선택", "가격"]
-
-    
     //MARK: - Properties
     
-    
     let titleView = TitleView()
-
     
-    let pickerButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "camera.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .normal)
+    private let imagePicker = UIImagePickerController()
+    private var profileImage: UIImage?
+    private let textViewField = TextViewField()
+    
+    private let plusPhotoButton: UIButton = {
+        
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "camera.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(handleAddProfilePhoto), for: .touchUpInside)
         button.layer.borderWidth = 1
-        button.layer.borderColor = .init(gray: 1, alpha: 0.15)
+        button.layer.borderColor = UIColor.darkGray.cgColor
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(handlePickerPhoto), for: .touchUpInside)
-        
         
        return button
     }()
     
+    private let itemTitleInputField: UITextField = {
+       let tf = UITextField()
+        tf.placeholder = "글 제목"
+        tf.backgroundColor = baseColor
+        
+        return tf
+    }()
     
-    let tableView = UITableView()
+    private let itemPriceInputField: UITextField = {
+       let tf = UITextField()
+        tf.placeholder = "가격"
+        tf.backgroundColor = baseColor
+        return tf
+    }()
     
-
-
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        return view
+    }()
+    
+    private let divider2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        return view
+    }()
+    
+    private let divider3: UIView = {
+        let view = UIView()
+        view.backgroundColor = .darkGray
+        return view
+    }()
+    
+    
+    
     
     
     //MARK: - Lifecycle
 
-    
-
-  
-
-       
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        view.backgroundColor = baseColor
-        
-        configureTableView()
         configureUI()
-        self.hideKeyboardWhenTappedAround()
-
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboardByTappingOutside))
+        
+        self.view.addGestureRecognizer(tap)
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
-   }
     
     
     //MARK: - Actions
 
-    @objc func handlePickerPhoto() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        present(picker, animated: true, completion: nil)
+    @objc func handleAddProfilePhoto() {
+        present(imagePicker, animated: true, completion: nil)
     }
     
+    @objc func hideKeyboardByTappingOutside() {
+        self.view.endEditing(true)
+    }
+        
     
-
     
     //MARK: - Helpers
-    
-    
+
     
     func configureUI() {
         
         titleView.delegate = self
         
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+
+        
+        view.backgroundColor = baseColor
+        
         view.addSubview(titleView)
         titleView.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
         titleView.setDimension(width: view.frame.width, height: 90)
         
-    }
-    
-    
-    func configureTableView() {
+        view.addSubview(plusPhotoButton)
+        plusPhotoButton.anchor(top: titleView.bottomAnchor, left: view.leftAnchor, paddingTop: 25, paddingLeft: 20)
+        plusPhotoButton.setDimension(width: 70, height: 70)
         
-        tableView.backgroundColor = baseColor
-        tableView.dataSource = self
-        tableView.rowHeight = 70
-        tableView.separatorInset = .init(top: 0, left: 15, bottom: 0, right: 15)
-        tableView.register(AddItemCell.self, forCellReuseIdentifier: reuseIdentifier)
+        view.addSubview(itemTitleInputField)
+        itemTitleInputField.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 20)
+        itemTitleInputField.setDimension(width: view.frame.width - 40, height: 70)
+        
+        view.addSubview(divider)
+        divider.anchor(top: itemTitleInputField.topAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                       paddingLeft: 20, paddingRight: 20, height: 0.5)
+        
+        view.addSubview(divider2)
+        divider2.anchor(left: view.leftAnchor, bottom: itemTitleInputField.bottomAnchor,  right: view.rightAnchor,
+                       paddingLeft: 20, paddingRight: 20, height: 0.5)
         
         
-        let header = AddItemHeaderView(frame: CGRect(x: 0, y: 90, width: view.frame.width, height: 159))
+        view.addSubview(itemPriceInputField)
+        itemPriceInputField.anchor(top: itemTitleInputField.bottomAnchor, left: view.leftAnchor, paddingLeft: 20)
+        itemPriceInputField.setDimension(width: view.frame.width - 40, height: 70)
         
-        let footer = AddItemFooterView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 500))
-        footer.delegate = self // textView에는 place홀더없어서 placeholder 델리게이트 활성화
+        view.addSubview(divider3)
+        divider3.anchor(top: itemPriceInputField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+                        paddingLeft: 20, paddingRight: 20, height: 0.5)
         
-        
-        tableView.tableHeaderView = header
-        tableView.tableFooterView = footer
-
-        
-        view.addSubview(tableView)
-        tableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 50)
-        
-        header.addSubview(pickerButton)
-        pickerButton.anchor(top: header.topAnchor, left: header.leftAnchor, bottom: header.bottomAnchor, paddingTop: 70, paddingLeft: 15, paddingBottom: 30)
-        pickerButton.setDimension(width: 60, height: 70)
-        
-    }
-
-    
-    
-    
-    
-}
-
-
-    //MARK: - UITableViewDataSource
-
-extension ItemAddController: UITableViewDataSource, UITextFieldDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! AddItemCell
-        
-        if indexPath.row == 0 {
-            
-            cell.inputField.placeholder = "글 제목"
-            cell.delegate = self
-            
-        } else if indexPath.row == 1 {
-            
-            cell.inputField.text = "카테고리 선택"
-
-            
-        } else {
-            
-            cell.inputField.placeholder = "₩ 가격"
-            cell.delegate = self
-
-        }
-        
-        cell.selectionStyle = .none
-        
-        return cell
+        view.addSubview(textViewField)
+        textViewField.anchor(top: divider3.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor)
         
     }
 }
 
-    //MARK: - TitleViewDelegate
 
+
+
+//MARK: - TitleViewDelegate
 
 extension ItemAddController: TitleViewDelegate {
-    func goNext() {
-        print("fetch Item...")
-    }
-    
     func goBefore() {
         dismiss(animated: true, completion: nil)
     }
-}
-
-    //MARK: - UITextViewDelegate
-
-let textViewPlaceHolder = "다정동에 올릴 게시글 내용을 작성해주세요.(가품 및 판매금지품목은 게시가 제한될 수 있어요.)"
-
-
-extension ItemAddController: UITextViewDelegate {
+    
+    func goNext() {
         
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
-            textView.text = nil
-            textView.textColor = .white
+        print(#function)
+        
+        guard let image = profileImage else { return }
+        guard let title = itemTitleInputField.text else { return }
+        guard let price = itemPriceInputField.text else { return }
+        guard let caption = textViewField.text else { return }
+
+        
+        let itemInfo = ItemInfo(itemImage: image, itemTitle: title, itemPrice: price, itemCaption: caption)
+        
+        ItemService.shared.uploadItem(itemInfo: itemInfo) { err, ref in
+            if let err = err {
+                print(err.localizedDescription)
+                return
+            }
+                self.dismiss(animated: true, completion: nil)
         }
-    }
-
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textViewPlaceHolder
-            textView.textColor = UIColor(hex: "51545B")
-        }
-    }
-
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
-        let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
-
-        return true
     }
 }
 
-// TextView는 placeHolder를 제공하지 않으므로 델리게이트를 이용해서 만들어야함
-
-//MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
-
+// MARK: - UIImagePickerControllerDelegate
+// 선택한 사진으로 어떠한 행위를 할 수 있음
 
 extension ItemAddController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[.originalImage] as? UIImage
-        pickerButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
-        pickerButton.layer.borderWidth = 0
-        pickerButton.imageView?.contentMode = .scaleAspectFill
+        guard let profileImage = info[.editedImage] as? UIImage else { return }
+        // info[.editedImage] -> 원본 이미지인지, 편집된 이미지인지, 동영상인지 알아야함
+        self.profileImage = profileImage
+        
+        plusPhotoButton.imageView?.contentMode = .scaleAspectFill
+        plusPhotoButton.imageView?.clipsToBounds = true
+        plusPhotoButton.layer.borderWidth = 0
+        
+        self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
-//MARK: - AddCellDelegate
-
-extension ItemAddController: AddCellDelegate {
-    func settingsCell(value: String) {
-        
-    }
-}
-
-extension ItemAddController: AddItemFooterViewDelegate {
-    func extractContents(value: String) {
-        
-        
-    }
-}
-
+// MARK: - 수정해야할것
+// responder가 TextView나 textFieldView에 가 있으면 TitleView의 button이 작동하지 않음
+// photoView의 화면을 클릭해야만 넘어감
 
